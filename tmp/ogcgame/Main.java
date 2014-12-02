@@ -41,6 +41,6 @@ public class Main extends OGCGame {
 //        }
         usersetup();
     }	public void usersetupF0() {
-newobject("Objectball", 50, 50);	}
+newobject("Objectball", 0, 0);	}
 public void usersetup() {
 usersetupF0();}}

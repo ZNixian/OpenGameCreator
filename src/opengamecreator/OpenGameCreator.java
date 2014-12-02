@@ -28,9 +28,12 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
@@ -61,7 +64,7 @@ public class OpenGameCreator {
     private SearchBar sb;
     private JDesktopPane desktopPane;
     private JInternalFrame logicEditorWindow;
-    private File openFile = new File("default-untitled.ogcgamebundle");
+    private File openFile = null;//new File("default-untitled.ogcgamebundle");
     private ResourceWindow resourceWindow;
     private JFileChooser fileChooser = new JFileChooser(".");
 
@@ -82,6 +85,8 @@ public class OpenGameCreator {
     }
 
     public OpenGameCreator() throws IOException {
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Open Game Creator bundle", "ogcgamebundle"));
+
         compiler = BlockCompiler.getDefaultBlockCompiler(); //new BlockCompiler();
         wc = new WorkspaceController();
         initLang();
@@ -129,9 +134,13 @@ public class OpenGameCreator {
         menus.open.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (SaveDialog.getInstance().showSaveDialog(OpenGameCreator.this)) {
-//                    int result = fileChooser.showDialog(null, "Open");
-                    loadProject(openFile);
+                int responce = SaveDialog.getInstance().showSaveDialog(OpenGameCreator.this);
+                if (responce != JOptionPane.CANCEL_OPTION) {
+                    int result = fileChooser.showOpenDialog(null);
+                    if (result == JFileChooser.APPROVE_OPTION) {
+                        openFile = fileChooser.getSelectedFile();
+                        loadProject(openFile);
+                    }
                 }
             }
         });
@@ -141,7 +150,11 @@ public class OpenGameCreator {
         menus.save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                saveProject(openFile);
+                if (openFile != null) {
+                    saveProject(openFile);
+                } else {
+                    JOptionPane.showMessageDialog(null, "No file is open. Please use File->Save as", "No file open", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
@@ -151,6 +164,15 @@ public class OpenGameCreator {
         menus.saveAs.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int result = fileChooser.showSaveDialog(null);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    if (fileChooser.getSelectedFile().exists()) {
+                        JOptionPane.showMessageDialog(null, "That file already exists!", "File exists", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    openFile = fileChooser.getSelectedFile();
+                    saveProject(openFile);
+                }
             }
         });
 

@@ -180,8 +180,9 @@ public class BlockCompiler {
         StringBuilder sb = new StringBuilder();
         File baseSprites = new File("tmp/io/resource/sprites");
         for (File file : baseSprites.listFiles()) {
-            if (!file.getName().endsWith(".png")) {
+            if (!file.getName().endsWith(".png") && !file.getName().endsWith(".bmp") && !file.getName().endsWith(".gif")) {
                 continue;
+            } else {
             }
             sb
                     .append(DigestUtils.md5Hex(file.getName()))

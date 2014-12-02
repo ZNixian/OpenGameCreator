@@ -25,10 +25,13 @@ public class SaveDialog {
         private static final SaveDialog INSTANCE = new SaveDialog();
     }
 
-    public boolean showSaveDialog(OpenGameCreator ogc) {
+    public int showSaveDialog(OpenGameCreator ogc) {
+//        int result = JOptionPane.
+//                showConfirmDialog(null, "Do you want to save the\ncurrently open project?",
+//                "Save?", JOptionPane.YES_NO_CANCEL_OPTION);
         int result = JOptionPane.
-                showConfirmDialog(null, "Do you want to save the\ncurrently open project?",
-                "Save?", JOptionPane.YES_NO_CANCEL_OPTION);
-        return result != JOptionPane.CANCEL_OPTION;
+                showConfirmDialog(null, "There may be unsaved changes.",
+                "Save?", JOptionPane.OK_CANCEL_OPTION);
+        return result;
     }
 }

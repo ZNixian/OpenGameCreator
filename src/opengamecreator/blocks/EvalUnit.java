@@ -39,6 +39,7 @@ public class EvalUnit {
     }
 
     private static Class<?> getC(String b) throws ClassNotFoundException {
+        b=b.replace("-", "");
         try {
             return Class.forName("opengamecreator.blocks.impl." + b);
         } catch (ClassNotFoundException ex) {

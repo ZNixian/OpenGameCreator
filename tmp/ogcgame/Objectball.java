@@ -15,7 +15,7 @@
 				y, // Y position
 				1, // the object's collision ID (used to determine which classes
 				   // of objects should collide with each other)
-				"301a6321b141d0405ab190756a69d600", // name of sprite or animation to use (null is none)
+				"daf280af792fd5b906511363ae2bc39d", // name of sprite or animation to use (null is none)
                          g			);
 			// Give the object an initial speed in a random direction.
 //			xspeed = random(-2,2);
@@ -30,11 +30,16 @@
 //            setColor(JGColor.yellow);
 //            drawOval(x,y,16,16,true,true);
 //        }
-public void move() {
-}public void setup() {
-}	public void drawUserF0() {
-		setColour((OGCGame.colourFromString("#FFFFFF")));
-		drawOval(50, 50, 10, 10, true, false);
+	public void onframe0() {
+		fd((10/10));
+if((y<x)) {
+		down(20);
+
+}
 	}
-public void paint() {
-drawUserF0();}}
+public void move() {
+onframe0();}	public void setup0() {
+	}
+public void setup() {
+setup0();}public void paint() {
+}}
