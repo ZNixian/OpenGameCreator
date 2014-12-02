@@ -235,7 +235,7 @@ public class BlockCompiler {
     public void buildManifest() {
         save(tmpManifestFile,
                 "Manifest-Version: 1.0\n"
-                + "Class-Path: " + CommandCompiler.includePath + "\n"
+                + "Class-Path: " + CommandCompiler.includePathJar + "\n"
                 + "Main-class: ogcgame.Main\n"
                 + "");
     }
