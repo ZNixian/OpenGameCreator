@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: C:\Users\Campbell Suter\Documents\jmonkey\projects\OpenMPGLCreator\jgame\jars\jgame-jre.jar;C:\Users\Campbell Suter\Documents\jmonkey\projects\OGCLib\dist\OGCLib.jar
+Main-class: ogcgame.Main
